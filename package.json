@@ -1,0 +1,23 @@
+{
+  "name": "saml2json",
+  "version": "0.0.1",
+  "description": "Converts a SAML 2.0 response into a JSON object. Nothing more.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/flesch/saml2json.git"
+  },
+  "keywords": [
+    "SAML",
+    "authentication"
+  ],
+  "author": "John Flesch <john@fles.ch>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/flesch/saml2json/issues"
+  },
+  "dependencies": {
+    "xmldom": "0.1.16",
+    "xpath": "0.0.5"
+  }
+}
