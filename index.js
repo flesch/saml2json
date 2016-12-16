@@ -1,23 +1,22 @@
-var xmldom = require('xmldom')
-  , xpath = require('xpath')
-  , saml2json = {}
-  ;
+'use strict';
 
-saml2json.parse = function(response){
+const { DOMParser } = require('xmldom');
+const { select } = require('xpath');
 
-  var xml = new Buffer(response, 'base64').toString('ascii')
-    , doc = new xmldom.DOMParser().parseFromString(xml)
-    , profile = {}, attributes
-    ;
+const parse = (assertion) => {
 
-  attributes = xpath.select('//*[local-name() = "AttributeStatement"]/*', doc);
-  attributes.forEach(function(attribute){
-    var name = xpath.select('string(@Name)', attribute).toLowerCase();    
-    profile[name] = xpath.select('string(*[local-name() = "AttributeValue"]/text())', attribute);
+  if (!assertion) { throw new Error('A SAML assertion is required!'); }
+
+  const xml = new Buffer(assertion, 'base64').toString('ascii');
+  const doc = new DOMParser().parseFromString(xml);
+
+  const statements = select('//*[local-name() = "AttributeStatement"]/*', doc).map(statement => {
+    const attribute = select('string(@Name)', statement);
+    return { [attribute]: select('string(*[local-name() = "AttributeValue"]/text())', statement) };
   });
 
-  return profile;
-  
+  return Object.assign.apply({}, statements);
+
 };
 
-module.exports = saml2json;
+module.exports.parse = parse;

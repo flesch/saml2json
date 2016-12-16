@@ -1,23 +1,35 @@
 {
   "name": "saml2json",
-  "version": "0.0.1",
-  "description": "Converts a SAML 2.0 response into a JSON object. Nothing more.",
-  "main": "index.js",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/flesch/saml2json.git"
-  },
-  "keywords": [
-    "SAML",
-    "authentication"
-  ],
+  "description": "Extracts a base64 encoded SAML 2.0 assertion's attributes into a JSON object.",
+  "version": "1.0.0",
   "author": "John Flesch <john@fles.ch>",
-  "license": "MIT",
   "bugs": {
     "url": "https://github.com/flesch/saml2json/issues"
   },
   "dependencies": {
-    "xmldom": "0.1.16",
-    "xpath": "0.0.5"
+    "xmldom": "0.1.27",
+    "xpath": "0.0.23"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.18.0",
+    "babel-preset-es2015": "^6.18.0"
+  },
+  "keywords": [
+    "JSON",
+    "SAML",
+    "assertion",
+    "authentication",
+    "parse"
+  ],
+  "license": "MIT",
+  "main": "lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/flesch/saml2json.git"
+  },
+  "scripts": {
+    "build": "babel index.js --presets babel-preset-es2015 --out-file lib/index.js",
+    "preversion": "npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1"
   }
 }
